@@ -16,7 +16,7 @@ if (isset($_POST['login'])) {
 
 		$passwordCorrect = password_verify($password, $pass);
 
-		$sqladmin = "SELECT role from user where email='" . $email . "'";
+		$sqladmin = "SELECT username,role from user where email='" . $email . "'";
 		$queryadmin = mysqli_query($conn, $sqladmin);
 		$rowadmin = mysqli_fetch_assoc($queryadmin);
 
@@ -24,7 +24,7 @@ if (isset($_POST['login'])) {
 
 
 		if ($passwordCorrect) {
-			$_SESSION["email"] = $email;
+			$_SESSION["email"] = $rowadmin['username'];
 			echo " <p style='color: blue; font-style: all;padding: 2rem; font-size: 1.5rem;text-align:center;'>Success! </p> <script>window.location = 'index.php'</script>";
 		} else {
 			echo "<p style='color: red; font-style: all;padding: 2rem; font-size: 1.5rem;text-align: center'>Check your credentials! </p>";

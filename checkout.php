@@ -5,7 +5,6 @@ include("database/connect.php");
 
 <?php
 if (isset($_POST['checkout'])) {
-  $name = $_POST['name'];
   $firstname = $_POST['firstname'];
   $lastname = $_POST['lastname'];
   $country = $_POST['country'];
@@ -35,8 +34,9 @@ if (isset($_POST['checkout'])) {
     $q = $value['quantity'];
     $c = $value['name'];
     $s = $value['size'];
+    $user = $_SESSION['email'];
     $sql = "INSERT INTO orders (username, firstname, Item_id, lastname, country, phone, email, address, quantity, total, payment_method, Item_category, Item_size)
-            VALUES ('$name','$firstname', '$product_id', '$lastname', '$country','$phone','$email', '$address', '$q', '$total', '$payment_method', '$c', '$s')";
+            VALUES ('$user','$firstname', '$product_id', '$lastname', '$country','$phone','$email', '$address', '$q', '$total', '$payment_method', '$c', '$s')";
     $result = mysqli_query($conn, $sql);
     $_SESSION['cart'] = [];
     echo '<script>window.location="thankyou.php"</script>';
@@ -61,19 +61,12 @@ if (isset($_POST['checkout'])) {
                       <div class="p-3 p-lg-5 border">
 
                         <div class="form-group row">
-                          <div class="form-group col-md-6">
-                            <label>Username</label>
-                            <input type="text" name="name" class="form-control" id="name" placeholder="Username" required>
-                          </div>
 
                           <div class="col-md-6">
                             <label> <strong>First name:</strong></label><br>
                             <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Your First name" required><br>
 
                           </div>
-                        </div>
-
-                        <div class="form-group row">
                           <div class="col-md-6">
                             <label><strong>Last name:</strong></label><br>
                             <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Meshal" required><br>
@@ -102,7 +95,7 @@ if (isset($_POST['checkout'])) {
                         <div class="form-group row">
                           <div class="col-md-12">
                             <label>Email</label>
-                            <input type="email" name="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z0-9.-]{1,}[.]{1}[a-zA-Z0-9]{2,}" class="form-control" id="email" placeholder="name@email.something" required value="<?php echo $_SESSION['email'] ?>">
+                            <input type="email" name="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z0-9.-]{1,}[.]{1}[a-zA-Z0-9]{2,}" class="form-control" id="email" placeholder="name@email.something" required>
                           </div>
                         </div>
 

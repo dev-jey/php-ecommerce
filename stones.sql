@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 17, 2020 at 11:12 AM
+-- Generation Time: Apr 17, 2020 at 07:48 PM
 -- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.4
+-- PHP Version: 7.3.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -102,7 +103,13 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`username`, `Order_id`, `Item_id`, `quantity`, `total`, `address`, `payment_method`, `firstname`, `lastname`, `email`, `Item_category`, `Item_size`, `country`, `phone`) VALUES
-('bb', 30, 23052438, 1, 2000, '32211', 'VISA', 'bb', 'bb', 'h@hotmail.com', 'Bracelet', 'S', 'KSA', '678-789-8977');
+('bb', 30, 23052438, 1, 2000, '32211', 'VISA', 'bb', 'bb', 'h@hotmail.com', 'Bracelet', 'S', 'KSA', '678-789-8977'),
+('fahad123', 46, 2902254, 3, 37000, '2222222', 'VISA', 'fahad', 'saleh', 'f@hotmail.com', 'Earring', 'M', 'KSA', '777-777-8888'),
+('fahad123', 47, 2902254, 20, 37000, '2222222', 'VISA', 'fahad', 'saleh', 'f@hotmail.com', 'Rings', 'M', 'KSA', '777-777-8888'),
+('fahad123', 48, 2902254, 1, 1700, '222', 'VISA', 'fahad', 'saleh', 'f@hotmail.com', 'Rings', 'M', 'KSA', '777-777-8888'),
+('razan333', 49, 23052434, 2, 2400, '67', 'VISA', 'rrrr', 'ddddd', 'mimi@gmail.com', 'Bracelet', 'M', 'KSA', '999-999-0000'),
+('razan123', 50, 23052438, 1, 2000, '123', 'PayPal', 'razan', 'alii', 'mimi@gmail.com', 'Bracelet', 'S', 'KSA', '222-222-2222'),
+('razan123', 51, 2902254, 1, 1700, '123', 'PayPal', 'razan', 'alii', 'mimi@gmail.com', 'Rings', 'M', 'KSA', '444-444-4443');
 
 -- --------------------------------------------------------
 
@@ -153,6 +160,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`username`, `firstname`, `lastname`, `gender`, `phone`, `email`, `country`, `password`, `role`) VALUES
 ('fahad123', 'fahad', 'saleh', 'M', '777-777-8888', 'f@hotmail.com', 'KSA', '$2y$10$dbldx/msox33rX8mUu8aT.fceXLSBrWHT7Nvhk1.2lFkfwLE.vfW2', 0),
+('maram123', 'maram333', 'saleh', 'M', '000-444-4444', 'maram@hotmail.com', 'KSA', '$2y$10$3ZkYPf0jvEOSoRFZyRAQheApZMlFVEa/Z5hQqNs.bAW1aLLXdftzC', 0),
 ('razan333', 'razan', 'alii', 'F', '555-656-4325', 'mimi@gmail.com', 'KSA', '$2y$10$lP4LintdZOVS2iCq/NlTzekHokBJo9dHjoxPwbEK8ucYoWB4jrswG', 0),
 ('NajlaAbdullah', 'Naijla', 'Abdullah', 'F', '888-987-9998', 'NajlaAbdullah@hotmail.com', 'KSA', '$2y$10$.U8GplCQNqZ3AJ5ZYNv8QOFvY19tUMEmZomECtucBHjpGHqFAOBga', 0),
 ('smith9', 'smith', 'tomey', 'M', '234-234-2342', 'sav@gmail.com', 'USA', '$2y$10$UhPk5JBNQiUKntbFDcmrIOHiA5HjQvNpPZ12qs8i.uT8dtoEnGeGy', 0);
@@ -208,7 +216,7 @@ ALTER TABLE `item`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `Order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `Order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `stone_type`

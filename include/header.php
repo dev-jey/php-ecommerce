@@ -97,19 +97,14 @@ session_start();
 							} ?>
 							<li><a href="contact.php">Contact Us</a></li>
 							<li class="has-dropdown">
+								<?php
+								if (!isset($_SESSION['email'])) { ?>
 								<a href="account.php">Account</a>
-								<ul class="dropdown">
-									<?php
-									if (!isset($_SESSION['email'])) { ?>
+									<ul class="dropdown">
 										<li><a href="account.php">Sign in</a></li>
 										<li><a href="sign-up.php">Sign up</a></li>
-									<?php } else { ?>
-										<li>Hello, <?php echo $_SESSION["email"] ?></li>
-										<li><a href="logout.php">Logout</a></li>
-									<?php } ?>
-
-
-								</ul>
+									</ul>
+								<?php } ?>
 							</li>
 
 						</ul>
@@ -130,12 +125,21 @@ session_start();
 																									} else {
 																									?> 0
 											<?php } ?>
-										</small><i class="icon-shopping-cart"></i></span></a></li>
+										</small><i class="icon-shopping-cart"></i></span></a>
+							</li>
 						</ul>
+					</div>
+
+					<div class="text-right  hidden-xs menu-2">
+						<?php if (isset($_SESSION['email'])) {
+						?>
+							Hello, <?php echo $_SESSION["email"] ?>
+							<a href="logout.php" style="background: #000; color: #fff">Logout</a>
+						<?php } ?>
 					</div>
 				</div>
 
 			</div>
 			<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-			<i class="fa fa-chevron-circle-left"  onclick="window.history.back()" style="font-size: 3.75rem; margin: auto 1rem; cursor: pointer"></i>
+			<i class="fa fa-chevron-circle-left" onclick="window.history.back()" style="font-size: 3.75rem; margin: auto 1rem; cursor: pointer"></i>
 		</nav>

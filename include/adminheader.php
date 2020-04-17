@@ -66,8 +66,8 @@ session_start();
 	<script src="js/respond.min.js"></script>
     <![endif]-->
     <script src="sweetalert2.all.min.js"></script>
-<!-- Optional: include a polyfill for ES6 Promises for IE11 -->
-<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+    <!-- Optional: include a polyfill for ES6 Promises for IE11 -->
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
 
 </head>
 
@@ -86,22 +86,24 @@ session_start();
                     <div class="col-md-6 col-xs-6 text-center menu-1">
                         <ul>
                             <li class="has-dropdown">
-                                <a href="admin.php">Account</a>
-                                <ul class="dropdown">
-                                    <?php
-                                    if (!isset($_SESSION['admin'])) { ?>
-                                        <li><a href="admin.php">Admin Login</a></li>
-                                    <?php } else { ?>
-                                        <li>Hello, <?php echo $_SESSION["admin"] ?></li>
-                                        <li><a href="logout.php">Logout</a></li>
-                                    <?php } ?>
+                                <a href="adminhome.php">Home</a>
 
-
-                                </ul>
                             </li>
+
                     </div>
+
+					<div class="text-right  hidden-xs menu-2">
+						<?php if (isset($_SESSION['admin'])) {
+						?>
+							Hello, <?php echo $_SESSION["admin"] ?>
+							<a href="logout.php" style="background: #000; color: #fff">Logout</a>
+						<?php } ?>
+					</div>
 
                 </div>
 
             </div>
+            <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+            <i class="fa fa-chevron-circle-left" onclick="window.history.back()" style="font-size: 3.75rem; margin: auto 1rem; cursor: pointer"></i>
         </nav>
