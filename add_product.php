@@ -16,8 +16,10 @@ if (isset($_POST['addthisprod'])) {
     $Item_size = $_POST['Item_size'];
     $Description = $_POST['Description'];
     $Item_price = $_POST['Item_price'];
+    $In_stock = $_POST['In_stock'];
 
-    $sqlinsert = "INSERT INTO item(image,Item_category,Item_color,Stone_type,Material,warranty,Item_size,Description, Item_price) VALUES('$image','$Item_category','$Item_color','$Stone_type','$Material', '$warranty', '$Item_size', '$Description', '$Item_price')";
+    $sqlinsert = "INSERT INTO item(image,Item_category,Item_color,Stone_type,Material,warranty,Item_size,Description, Item_price, In_stock) VALUES('$image','$Item_category','$Item_color','$Stone_type','$Material', '$warranty', '$Item_size', '$Description', '$Item_price', '$In_stock')";
+    echo $sqlinsert;
     mysqli_query($conn, $sqlinsert);
     echo '<script>window.location="adminhome.php"</script>';
 
@@ -41,6 +43,8 @@ if (isset($_POST['addthisprod'])) {
 
             <br>
             <input type="number" required name="Item_price" placeholder="Price" size=50 style="padding: 10px; margin-bottom: 20px;">
+            <br>
+            <input type="number" required name="In_stock" placeholder="In stock" size=50 style="padding: 10px; margin-bottom: 20px;">
 
             <br>
             <input type="number" required name="Stone_type" placeholder="Stone type id" size=50 style="padding: 10px; margin-bottom: 20px;">
