@@ -1,6 +1,6 @@
 <?php
 include("database/connect.php");
-include("include/header.php");
+
 ?>
 
 <?php
@@ -20,12 +20,23 @@ if (isset($_POST['checkout'])) {
   $product_id = $_POST['product_id'];
   $payment_method = $_POST['payment_method'];
 
+  $cookie_name = "USER_PRODOC" . rand(0, 9999);
+  setcookie($cookie_name, $product_id, time() + 30 * 24 * 60 * 60);
+  if (!$quantity && !$product_id) {
+    echo '<script>window.location="cart1.php"</script>';
+  }
+}
+?>
+<?php
+include("include/header.php");
+
+if (isset($_POST['checkout'])) {
   foreach ($_SESSION["cart"] as $key => $value) {
     $q = $value['quantity'];
     $c = $value['name'];
     $s = $value['size'];
     $sql = "INSERT INTO orders (username, firstname, Item_id, lastname, country, phone, email, address, quantity, total, payment_method, Item_category, Item_size)
-              VALUES ('$name','$firstname', '$product_id', '$lastname', '$country','$phone','$email', '$address', '$q', '$total', '$payment_method', '$c', '$s')";
+            VALUES ('$name','$firstname', '$product_id', '$lastname', '$country','$phone','$email', '$address', '$q', '$total', '$payment_method', '$c', '$s')";
     $result = mysqli_query($conn, $sql);
     $_SESSION['cart'] = [];
     echo '<script>window.location="thankyou.php"</script>';
@@ -57,7 +68,7 @@ if (isset($_POST['checkout'])) {
 
                           <div class="col-md-6">
                             <label> <strong>First name:</strong></label><br>
-                            <input type="text" class="form-control" id="fname" name="firstname" placeholder="Your First name" required><br>
+                            <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Your First name" required><br>
 
                           </div>
                         </div>
@@ -65,7 +76,7 @@ if (isset($_POST['checkout'])) {
                         <div class="form-group row">
                           <div class="col-md-6">
                             <label><strong>Last name:</strong></label><br>
-                            <input type="text" class="form-control" id="lname" name="lastname" placeholder="Meshal" required><br>
+                            <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Meshal" required><br>
                           </div>
 
                           <div class="form-group col-md-6">
@@ -91,25 +102,25 @@ if (isset($_POST['checkout'])) {
                         <div class="form-group row">
                           <div class="col-md-12">
                             <label>Email</label>
-                            <input type="email" name="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z0-9.-]{1,}[.]{1}[a-zA-Z0-9]{2,}" class="form-control" id="email" placeholder="name@email.something" required>
+                            <input type="email" name="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z0-9.-]{1,}[.]{1}[a-zA-Z0-9]{2,}" class="form-control" id="email" placeholder="name@email.something" required value="<?php echo $_SESSION['email'] ?>">
                           </div>
                         </div>
 
                         <div class="form-group row">
                           <div class="col-md-12">
                             <label for="c_postal_zip" class="text-black">Posta / Zip <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="c_postal_zip" name="postal_zip">
+                            <input type="text" class="form-control" id="postal_zip" name="postal_zip">
                           </div>
                         </div>
                         <div class="form-group row">
                           <div class="col-md-12">
                             <label for="c_address" class="text-black">Address <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="c_address" name="address" placeholder="Street address">
+                            <input type="text" class="form-control" id="address" name="address" placeholder="Street address">
                           </div>
                         </div>
 
                         <div class="form-group">
-                          <input type="text" name="apartment" class="form-control" placeholder="Apartment, suite, unit etc. (optional)">
+                          <input type="text" name="apartment" id="apartment" class="form-control" placeholder="Apartment, suite, unit etc. (optional)">
                         </div>
                       </div>
                     </div>
@@ -133,7 +144,7 @@ if (isset($_POST['checkout'])) {
                                   $total = 0;
                                   foreach ($_SESSION["cart"] as $key => $value) { ?>
                                     <tr>
-                                      <input hidden name="product_id" value="<?php echo $value['product_id'] ?>">
+                                      <input hidden name="product_id" name="product_id" value="<?php echo $value['product_id'] ?>">
                                       <td><?php echo $value['name'] ?> <strong class="mx-2">x</strong> <?php echo $value['quantity'] ?></td>
                                       <input name="quantity" hidden value="<?php echo  $value['quantity'] ?>" />
                                       <td><?php echo ($value["quantity"] * $value["price"]) ?></td>
@@ -202,7 +213,8 @@ if (isset($_POST['checkout'])) {
                             </div>
 
                             <div class="form-group">
-                              <p><button type="submit" class="btn btn-sm height-auto px-4 py-3 btn-primary" name="checkout">Place Order</button></p>
+                              <p>
+                                <button class="btn btn-dark btn-sm height-auto px-4 py-3 " style="border: 1px solid silver" type="reset">Clear</button><button type="submit" class="btn btn-sm height-auto px-4 py-3 btn-primary" name="checkout">Place Order</button></p>
                             </div>
 
                           </div>
@@ -215,6 +227,14 @@ if (isset($_POST['checkout'])) {
       </div>
     </div>
   </div>
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript">
+    $().ready(function() {
+      <?php foreach ($_POST as $fieldName => $fieldValue) : ?>
+        $("#<?php echo $fieldName; ?>").val("<?php echo htmlspecialchars($fieldValue); ?>");
+      <?php endforeach; ?>
+    });
+  </script>
 
   <?php
   include("include/footer.php");

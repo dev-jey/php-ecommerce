@@ -65,6 +65,9 @@ session_start();
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
+	<script src="sweetalert2.all.min.js"></script>
+	<!-- Optional: include a polyfill for ES6 Promises for IE11 -->
+	<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
 
 </head>
 
@@ -82,6 +85,7 @@ session_start();
 					</div>
 					<div class="col-md-6 col-xs-6 text-center menu-1">
 						<ul>
+							<li><a href="admin.php">Admin</a></li>
 							<li class="has-dropdown">
 								<a href="index.php">Home</a>
 
@@ -100,7 +104,7 @@ session_start();
 										<li><a href="account.php">Sign in</a></li>
 										<li><a href="sign-up.php">Sign up</a></li>
 									<?php } else { ?>
-										<li><?php echo $_SESSION["email"] ?></li>
+										<li>Hello, <?php echo $_SESSION["email"] ?></li>
 										<li><a href="logout.php">Logout</a></li>
 									<?php } ?>
 
@@ -132,4 +136,6 @@ session_start();
 				</div>
 
 			</div>
+			<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+			<i class="fa fa-chevron-circle-left"  onclick="window.history.back()" style="font-size: 3.75rem; margin: auto 1rem; cursor: pointer"></i>
 		</nav>

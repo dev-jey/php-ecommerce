@@ -25,11 +25,7 @@ if (isset($_POST['login'])) {
 
 		if ($passwordCorrect) {
 			$_SESSION["email"] = $email;
-			if ($role == 0) {
-				echo " <p style='color: blue; font-style: all;padding: 2rem; font-size: 1.5rem;text-align:center;'>Success! </p> <script>window.location = 'index.php'</script>";
-			} else {
-				echo " <p style='color: blue; font-style: all;padding: 2rem; font-size: 1.5rem;text-align: center'>Success! </p> <script>window.location = 'admin/dashboard.php'</script>";
-			}
+			echo " <p style='color: blue; font-style: all;padding: 2rem; font-size: 1.5rem;text-align:center;'>Success! </p> <script>window.location = 'index.php'</script>";
 		} else {
 			echo "<p style='color: red; font-style: all;padding: 2rem; font-size: 1.5rem;text-align: center'>Check your credentials! </p>";
 		}
@@ -41,18 +37,28 @@ if (isset($_POST['login'])) {
 <form class="loginform" action="account.php" method="POST" style="padding: 2rem;">
 	<div class="form-group" style="width: 50%; margin: auto;">
 		<label>Email address</label>
-		<input type="email" class="form-control" id="login" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+		<input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
 	</div><br>
 	<div class="form-group" style="width: 50%; margin: auto;">
 		<label>Password</label>
-		<input type="password" class="form-control" id="login" name="password" placeholder="Password">
+		<input type="password" class="form-control" id="password" name="password" placeholder="Password">
 	</div><br>
-	<div class="form-check"  style="width: 50%; margin: auto;">
-	<button type="submit" class="btn btn-primary" name="login">Submit</button>
-	<!-- <a href='register.php'>Signup</a> -->
-	<p style="float: right;">New User? <a href="sign-up.php">Signup</a></p>
+	<div class="form-check" style="width: 50%; margin: auto;">
+
+		<button class="btn btn-dark" style="border: 1px solid silver" type="reset">Clear</button>
+		<button type="submit" class="btn btn-primary" name="login">Submit</button>
+		<!-- <a href='register.php'>Signup</a> -->
+		<p style="float: right;">New User? <a href="sign-up.php">Signup</a></p>
 	</div>
 </form>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript">
+	$().ready(function() {
+		<?php foreach ($_POST as $fieldName => $fieldValue) : ?>
+			$("#<?php echo $fieldName; ?>").val("<?php echo htmlspecialchars($fieldValue); ?>");
+		<?php endforeach; ?>
+	});
+</script>
 <?php
 include("include/footer.php");
 

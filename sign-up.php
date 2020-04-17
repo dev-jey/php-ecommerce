@@ -59,7 +59,7 @@ if (isset($_POST['register'])) {
 		<div class="form-group">
 			<div class="col-md-6">
 				<label> <strong>First name:</strong></label><br>
-				<input type="text" class="form-control" id="fname" name="firstname" placeholder="Your First name" required><br>
+				<input type="text" class="form-control" id="firstname" name="firstname" placeholder="Your First name" required><br>
 
 			</div>
 		</div>
@@ -67,7 +67,7 @@ if (isset($_POST['register'])) {
 		<div class="form-group">
 			<div class="col-md-6">
 				<label><strong>Last name:</strong></label><br>
-				<input type="text" class="form-control" id="lname" name="lastname" placeholder="Meshal" required><br>
+				<input type="text" class="form-control" id="lastname" name="lastname" placeholder="Meshal" required><br>
 			</div>
 		</div>
 
@@ -119,10 +119,24 @@ if (isset($_POST['register'])) {
 			<label class="form-check-label">
 				<input class="form-check-input" type="checkbox" required> Agree to terms & conditions
 			</label>
+			<details>
+				<summary> Terms and conditions </summary>
+				<p>
+					You agree that by accessing the Site, you have read, understood, and agree to be bound by all of these Terms of Use, which were created using Shine bright terms and conditions generator. If you do not agree with all of these Terms of Use, then you are expressly prohibited from using the Site and you must discontinue use immediately. Supplemental terms and conditions or documents that may be posted on the Site from time to time are hereby expressly incorporated herein by reference. We reserve the right, in our sole discretion, to make changes or modifications to these Terms of Use at any time and for any reason. We will alert you about any changes by updating the “Last updated” date of these Terms of Use, and you waive any right to receive specific notice of each such change. It is your responsibility to periodically review these Terms of Use to stay informed of updates. You will be subject to, and will be deemed to have been made aware of and to have accepted.</p>
+			</details>
 		</div>
 	</div>
+	<button class="btn btn-dark btn-lg" style="border: 1px solid silver" type="reset">Clear</button>
 	<input type="submit" name="register" class="btn btn-primary btn-lg" value="Sign Up">
 </form>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript">
+	$().ready(function() {
+		<?php foreach ($_POST as $fieldName => $fieldValue) : ?>
+			$("#<?php echo $fieldName; ?>").val("<?php echo htmlspecialchars($fieldValue); ?>");
+		<?php endforeach; ?>
+	});
+</script>
 <?php
 $conn->close();
 include("include/footer.php");

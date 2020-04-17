@@ -64,7 +64,10 @@ session_start();
     <!-- FOR IE9 below -->
     <!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
-	<![endif]-->
+    <![endif]-->
+    <script src="sweetalert2.all.min.js"></script>
+<!-- Optional: include a polyfill for ES6 Promises for IE11 -->
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
 
 </head>
 
@@ -89,7 +92,7 @@ session_start();
                                     if (!isset($_SESSION['admin'])) { ?>
                                         <li><a href="admin.php">Admin Login</a></li>
                                     <?php } else { ?>
-                                        <li><?php echo $_SESSION["admin"] ?></li>
+                                        <li>Hello, <?php echo $_SESSION["admin"] ?></li>
                                         <li><a href="logout.php">Logout</a></li>
                                     <?php } ?>
 

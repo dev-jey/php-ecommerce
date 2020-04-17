@@ -2,15 +2,59 @@
 include("database/connect.php");
 include("include/header.php");
 ?>
-<?php 
-if (isset($_POST['subm'])){
-	if(isset($_SESSION['email'])){
+<?php
+if (isset($_POST['subm'])) {
+	if (isset($_SESSION['email'])) {
 		echo '<script>window.location="checkout.php"</script>';
-	}else{
+	} else {
 		echo '<script>alert("Login to continue with purchase")</script>';
 		echo '<script>window.location="account.php"</script>';
 	}
 }
+
+
+if (isset($_POST['del'])) {
+	$item_id = $_POST["product_id"];
+	if (!empty($_SESSION["cart"])) {
+		foreach ($_SESSION["cart"] as $select => $val) {
+			if ($val["product_id"] == $item_id) {
+				unset($_SESSION["cart"][$select]);
+			}
+		}
+	}
+}
+if (isset($_POST['minus'])) {
+	$item_id = $_POST["product_id"];
+	if (!empty($_SESSION["cart"])) {
+		foreach ($_SESSION["cart"] as $select => $val) {
+			if ($val["product_id"] == $item_id) {
+				if ($_SESSION["cart"][$select]["quantity"] > 1) {
+					$_SESSION["cart"][$select]["quantity"] -= 1;
+				}
+			}
+		}
+	}
+}
+if (isset($_POST['add'])) {
+	$item_id = $_POST["product_id"];
+	if (!empty($_SESSION["cart"])) {
+		foreach ($_SESSION["cart"] as $select => $val) {
+			if ($val["product_id"] == $item_id) {
+				$q = $val["quantity"];
+				$sql3 = "SELECT * FROM item where In_stock > '" . $q . "' and  Item_id='" . $item_id . "'";
+				$res3 = mysqli_query($conn, $sql3);
+				$rowitem3 = mysqli_fetch_row($res3);
+				if ($res3->num_rows === 0) {
+					$error = true;
+					echo "<p style='color: red; font-style: all;padding: 0.3rem; font-size: 1.5rem;text-align:center;'>Items out of stock</p>";
+				} else {
+					$_SESSION["cart"][$select]["quantity"] += 1;
+				}
+			}
+		}
+	}
+}
+
 ?>
 <div class="site-wrap">
 	<div class="site-section">
@@ -26,7 +70,7 @@ if (isset($_POST['subm'])){
 									<th class="product-price">Price</th>
 									<th class="product-quantity">Quantity</th>
 									<th class="product-total">Total</th>
-									<!-- <th class="product-remove">Remove</th> -->
+									<th class="product-remove">Remove</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -50,23 +94,25 @@ if (isset($_POST['subm'])){
 											<td>
 												<div class="input-group mb-3" style="max-width: 80px;">
 													<div class="input-group-prepend">
-														<button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
+														<button class="btn btn-outline-primary js-btn-minus" type="submit" name="minus">&minus;</button>
 													</div>
-													<input type="text" disabled class="form-control text-center" value="<?php echo $value["quantity"] ?>" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+													<input type="number" min="1" class="form-control text-center" value="<?php echo $value["quantity"] ?>">
 													<div class="input-group-append">
-														<button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
+														<button class="btn btn-outline-primary js-btn-plus" type="submit" name="add">&plus;</button>
 													</div>
 												</div>
 											</td>
 
 											<td><?php echo number_format($value["quantity"] * $value["price"], 2); ?></td>
-											<!-- <td><a href="#" class="btn btn-primary height-auto btn-sm">X</a></td> -->
+											<input name="product_id" value="<?php echo $value['product_id'] ?>" hidden>
+											<td><button type="submit" name="del" class="btn btn-primary height-auto btn-sm">X</button></td>
 										</tr>
 									<?php
 										$total = $total + ($value["quantity"] * $value["price"]);
 									}
 									?>
 									<tr>
+										<td></td>
 										<td colspan="3" align="right">Total</td>
 										<th align="right">$ <?php echo number_format($total, 2); ?></th>
 										<td></td>
@@ -76,7 +122,7 @@ if (isset($_POST['subm'])){
 								?>
 									<tr>
 										<td>
-											<h3>Cart is Empty</h3>
+											<h5 style="color: red;">Cart is Empty</h5>
 										</td>
 										<td></td>
 										<td></td>
@@ -142,7 +188,7 @@ if (isset($_POST['subm'])){
 																} ?></strong>
 								</div>
 							</div>
-
+<br>
 							<div class="row">
 								<form action="cart1.php" method="POST">
 									<div class="col-md-12">
