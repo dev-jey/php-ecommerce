@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 17, 2020 at 07:48 PM
+-- Generation Time: Apr 18, 2020 at 03:13 AM
 -- Server version: 10.4.11-MariaDB
--- PHP Version: 7.3.14
+-- PHP Version: 7.4.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -72,8 +71,7 @@ INSERT INTO `item` (`Item_id`, `Item_color`, `Item_category`, `Item_price`, `Ite
 (2902254, 'Gold', 'Rings', 1700, 'M', 6, 'https://res.cloudinary.com/dw675k0f5/image/upload/v1587032489/storo/ring.png', 'Shining, smooth stainless steel ring     Embellished with crystals         Comes packed in a branded box', 'Metal', 2, 20),
 (5464833, 'Gold', 'Earring', 1000, 'M', 6, 'https://res.cloudinary.com/dw675k0f5/image/upload/v1587032497/storo/earrings.jpg', 'This pair of pierced earrings by crystal features a charming floral design. Each piece is highlighted by a pink stone, which is beautifully complemented by a rose-gold tone plated setting and clear crystal pave.', 'Metal', 1, 3),
 (5498966, 'Gold', 'Necklace', 800, 'M', 6, 'https://res.cloudinary.com/dw675k0f5/image/upload/v1587032511/storo/necklace.png', 'Smooth, rosegold-plated metal bracelet Floral charms with embellished crystals Open ends for adjustable fit Comes packed in a branded box', 'Metal', 2, 5),
-(23052434, 'Gold', 'Bracelet', 1200, 'M', 6, 'https://res.cloudinary.com/dw675k0f5/image/upload/v1587032523/storo/Bracelet.jpg', 'Quality bracelets for you', 'Metal', 2, 2),
-(23052438, 'Silver', 'Bracelet', 2000, 'S', 1, 'https://thumbs.dreamstime.com/b/short-gold-necklace-8350633.jpg', 'Great piece of art', 'Metal', 2, 1);
+(23052434, 'Gold', 'Bracelet', 1200, 'M', 6, 'https://res.cloudinary.com/dw675k0f5/image/upload/v1587032523/storo/Bracelet.jpg', 'Quality bracelets for you', 'Metal', 2, 2);
 
 -- --------------------------------------------------------
 
@@ -109,7 +107,10 @@ INSERT INTO `orders` (`username`, `Order_id`, `Item_id`, `quantity`, `total`, `a
 ('fahad123', 48, 2902254, 1, 1700, '222', 'VISA', 'fahad', 'saleh', 'f@hotmail.com', 'Rings', 'M', 'KSA', '777-777-8888'),
 ('razan333', 49, 23052434, 2, 2400, '67', 'VISA', 'rrrr', 'ddddd', 'mimi@gmail.com', 'Bracelet', 'M', 'KSA', '999-999-0000'),
 ('razan123', 50, 23052438, 1, 2000, '123', 'PayPal', 'razan', 'alii', 'mimi@gmail.com', 'Bracelet', 'S', 'KSA', '222-222-2222'),
-('razan123', 51, 2902254, 1, 1700, '123', 'PayPal', 'razan', 'alii', 'mimi@gmail.com', 'Rings', 'M', 'KSA', '444-444-4443');
+('razan123', 51, 2902254, 1, 1700, '123', 'PayPal', 'razan', 'alii', 'mimi@gmail.com', 'Rings', 'M', 'KSA', '444-444-4443'),
+('smith9', 52, 2902254, 2, 3400, '234', 'PayPal', 'Jey', 'Key', 'asep@gmail.com', 'Rings', 'M', 'KSA', '234-212-4122'),
+('smith9', 53, 23052438, 1, 2800, '2342', 'PayPal', 'Ken', 'Mijungu', 'min@gmail.com', 'Necklace', 'M', 'KSA', '234-123-2445'),
+('smith9', 54, 23052438, 1, 2800, '2342', 'PayPal', 'Ken', 'Mijungu', 'min@gmail.com', 'Bracelet', 'S', 'KSA', '234-123-2445');
 
 -- --------------------------------------------------------
 
@@ -216,7 +217,7 @@ ALTER TABLE `item`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `Order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `Order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `stone_type`

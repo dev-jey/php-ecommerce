@@ -13,7 +13,7 @@ if (isset($_POST['login'])) {
     $row = mysqli_fetch_assoc($result);
 
     if ($row) {
-        $_SESSION["admin"] = $row['username'];
+        $_SESSION["admin"] = $row['AdminUsername'];
         echo '<script>window.location="adminhome.php"</script>';
     } else {
         echo "<p style='color: red; font-style: all;padding: 2rem; font-size: 1.5rem;text-align: center'>Check your credentials! </p>";
