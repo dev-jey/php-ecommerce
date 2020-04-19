@@ -28,6 +28,9 @@ include("database/connect.php");
                 <table class="table table-striped custab">
                     <thead>
                         <a href="add_product.php" class="btn btn-primary btn-xs pull-right"><b>+</b> Add new product</a>
+                        
+                        <a name="Update/Delete Item" type="submit" value="Update/Delete Item" href = "Modify_Item.php" class="btn btn-primary" >Update/Delete Item</a>
+                        
                         <tr>
                             <th>ID</th>
                             <th>Image</th>

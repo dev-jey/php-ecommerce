@@ -11,11 +11,12 @@ if (isset($_POST['addthisprod'])) {
     $Stone_type = $_POST['Stone_type'];
     $Item_size = $_POST['Item_size'];
     $quantity = $_POST['quantity'];
+    $price = $_POST['price'];
     $sqlselect = "SELECT *  FROM Item_data where Item_id='" . $Item_category . "' and  Size='" . $Item_size . "' and type='" . $Stone_type . "' and Color='" . $Item_color . "'";
     $roe = mysqli_query($conn, $sqlselect);
     $rowitem3 = mysqli_fetch_assoc($roe);
     if ($roe->num_rows === 0) {
-        $sqlinsert = "INSERT INTO Item_data(Item_id,Color,Size,type, Quantity) VALUES('$Item_category','$Item_color','$Item_size','$Stone_type', '$quantity')";
+        $sqlinsert = "INSERT INTO Item_data(Item_id,Color,Size,type, Quantity, price) VALUES('$Item_category','$Item_color','$Item_size','$Stone_type', '$quantity', '$price')";
         // echo $sqlinsert;
         mysqli_query($conn, $sqlinsert);
     } else {
@@ -78,6 +79,7 @@ if (isset($_POST['addthisprod'])) {
                 </select>
             </div>
             <input type="number" name="quantity" class="form-control" placeholder="Quantity" required><br><br>
+            <input type="number" name="price" class="form-control" placeholder="Price" required><br><br>
             <!-- <a href="adminhome.php" class="btn btn-dark" style="padding: 7px 40px; margin-bottom: 20px;border: solid 1px green;">Back</a> -->
             <input type="submit" class="btn btn-primary" required name="addthisprod" value="Add this Product" style="padding: 7px 40px; margin-bottom: 20px;">
         </form>

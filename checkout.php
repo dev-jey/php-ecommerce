@@ -1,3 +1,5 @@
+<!--Azhar-Hissah-Sara sectin-->
+
 <?php
 include("database/connect.php");
 
@@ -18,6 +20,8 @@ if (isset($_POST['checkout'])) {
   $quantity = $_POST['quantity'];
   $product_id = $_POST['product_id'];
   $payment_method = $_POST['payment_method'];
+  $card_no = $_POST['card_no'];
+  $card_date = $_POST['card_date'];
 
   $cookie_name = "USER_PRODOC" . rand(0, 9999);
   setcookie($cookie_name, $product_id, time() + 30 * 24 * 60 * 60);
@@ -37,18 +41,19 @@ if (isset($_POST['checkout'])) {
     $t = $value['stone_type'];
     $color = $value['color'];
     $user = $_SESSION['email'];
-    $sql = "INSERT INTO orders (username, firstname, Item_id, lastname, country, phone, email, address, quantity, total, payment_method, Item_category, Item_size)
-            VALUES ('$user','$firstname', '$product_id', '$lastname', '$country','$phone','$email', '$address', '$q', '$total', '$payment_method', '$c', '$s')";
+    $sql = "INSERT INTO orders (username, firstname, Item_id, lastname, country, phone, email, address, quantity, total, payment_method, Item_category, Item_size, card_no, card_date)
+            VALUES ('$user','$firstname', '$product_id', '$lastname', '$country','$phone','$email', '$address', '$q', '$total', '$payment_method', '$c', '$s', '$card_no', '$card_date')";
+    // echo $sql;
     $result = mysqli_query($conn, $sql);
 
 
-    $sqlselect = "SELECT *  FROM Item_data where Item_id='" . $product_id. "' and  Size='" . $s . "' and type='" . $t . "' and Color='" . $color . "'";
+    $sqlselect = "SELECT *  FROM Item_data where Item_id='" . $product_id . "' and  Size='" . $s . "' and type='" . $t . "' and Color='" . $color . "'";
     $roe = mysqli_query($conn, $sqlselect);
     $rowitem3 = mysqli_fetch_assoc($roe);
     // echo $sqlselect;
 
     $new = $rowitem3['Quantity'] - $q;
-    $sr = "UPDATE Item_data SET Quantity='$new' where Item_id='" . $product_id. "' and  Size='" . $s . "' and type='" . $t . "' and Color='" . $color . "'";
+    $sr = "UPDATE Item_data SET Quantity='$new' where Item_id='" . $product_id . "' and  Size='" . $s . "' and type='" . $t . "' and Color='" . $color . "'";
     // echo $sr;
     $sq = mysqli_query($conn, $sr);
     $_SESSION['cart'] = [];
@@ -193,29 +198,28 @@ if (isset($_POST['checkout'])) {
                             <div class="border p-3 mb-3">
                               <h3 class="h4 mb-0">
                                 <label> <input type="radio" value="Visa" name="payment_method" required />
-                                  <a class="d-block" data-toggle="collapse" href="#collapsecheque" role="button" aria-expanded="false" aria-controls="collapsecheque">
-                                    Visa</a></h3>
+                                  <!-- <a class="d-block" data-toggle="collapse" href="#collapsecheque" role="button" aria-expanded="false" aria-controls="collapsecheque"> -->
+                                    Visa
                               </label>
 
-                              <div class="collapse" id="collapsecheque">
+                              <div class="collape" id="collapeceque">
                                 <div class="py-2">
-                                  <p class="mb-0">Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
+                                  <p class="mb-0 ml-4 pl-4" style="margin-left: 20px">Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
                                 </div>
-                              </div>
-                            </div>
 
-                            <div class="border p-3 mb-5">
-                              <h3 class="h4 mb-0">
-                                <label> <input type="radio" value="Paypal" name="payment_method" required />
-                                  <a class="d-block" data-toggle="collapse" href="#collapsepaypal" role="button" aria-expanded="false" aria-controls="collapsepaypal">
-                                    Paypal</a></h3>
-                              </label>
-
-                              <div class="collapse" id="collapsepaypal">
-                                <div class="py-2">
-                                  <p class="mb-0">Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
+                                <div class="col-md-12">
+                                  <label for="card_no" class="text-black">Card No<span class="text-danger">*</span></label>
+                                  <input type="number" class="form-control" id="card_no" name="card_no" required>
                                 </div>
-                              </div>
+                                <div class="col-md-12"><br>
+                                  <label for="card_Date" class="text-black">Expiry Date <span class="text-danger">*</span></label>
+                                  <input type="text" class="form-control" id="card_date" name="card_date" placeholder="MM/YYYY" required>
+                                </div>
+                                <br><br>
+                                <br><br>
+                                <br><br>
+                                <br><br>
+                              </div><br><br>
                             </div>
 
                             <div class="form-group">

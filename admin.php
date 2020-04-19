@@ -1,3 +1,5 @@
+<!--Maram sectin-->
+
 <?php
 include("include/header.php");
 include("database/connect.php");
