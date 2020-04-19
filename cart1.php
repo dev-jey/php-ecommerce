@@ -41,10 +41,15 @@ if (isset($_POST['add'])) {
 		foreach ($_SESSION["cart"] as $select => $val) {
 			if ($val["product_id"] == $item_id) {
 				$q = $val["quantity"];
-				$sql3 = "SELECT * FROM item where In_stock > '" . $q . "' and  Item_id='" . $item_id . "'";
+				$color = $_SESSION["cart"][$select]['color'];
+				$stone_type = $_SESSION["cart"][$select]['stone_type'];
+				$size = $_SESSION["cart"][$select]['size'];
+				$sql3 = "SELECT * FROM Item_data where Item_id='" . $item_id . "' and  Size='" . $size . "' and type='" . $stone_type . "' and Color='" . $color . "' ";
+				// echo $sql3;
 				$res3 = mysqli_query($conn, $sql3);
-				$rowitem3 = mysqli_fetch_row($res3);
-				if ($res3->num_rows === 0) {
+				// echo $sql3;
+				$rowitem3 = mysqli_fetch_assoc($res3);
+				if ($res3->num_rows > 0  && ($q >= $rowitem3['Quantity'])) {
 					$error = true;
 					echo "<p style='color: red; font-style: all;padding: 0.3rem; font-size: 1.5rem;text-align:center;'>Items out of stock</p>";
 				} else {
@@ -188,7 +193,7 @@ if (isset($_POST['add'])) {
 																} ?></strong>
 								</div>
 							</div>
-<br>
+							<br>
 							<div class="row">
 								<form action="cart1.php" method="POST">
 									<div class="col-md-12">

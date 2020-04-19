@@ -33,7 +33,6 @@ include("database/connect.php");
                             <th>Image</th>
                             <th>Name</th>
                             <th>Price</th>
-                            <th>Size</th>
                             <th>Description</th>
                         </tr>
                     </thead>
@@ -48,7 +47,6 @@ include("database/connect.php");
                             <td><img src="<?php echo $rows['image'] ?>" alt="No image" width="100"></td>
                             <td><?php echo $rows['Item_category'] ?></td>
                             <td><?php echo $rows['Item_price'] ?></td>
-                            <td><?php echo $rows['Item_size'] ?></td>
                             <td><?php echo $rows['Description'] ?></td>
                         </tr>
                     <?php
