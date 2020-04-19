@@ -16,7 +16,7 @@ if (isset($_POST['addthisprod'])) {
     $rowitem3 = mysqli_fetch_assoc($roe);
     if ($roe->num_rows === 0) {
         $sqlinsert = "INSERT INTO Item_data(Item_id,Color,Size,type, Quantity) VALUES('$Item_category','$Item_color','$Item_size','$Stone_type', '$quantity')";
-        echo $sqlinsert;
+        // echo $sqlinsert;
         mysqli_query($conn, $sqlinsert);
     } else {
         $new = $rowitem3['Quantity'] + $quantity;
