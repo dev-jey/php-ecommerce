@@ -78,7 +78,7 @@ if (isset($_POST['addthisprod'])) {
                 </select>
             </div>
             <input type="number" name="quantity" class="form-control" placeholder="Quantity" required><br><br>
-            <a href="admin_product.php" class="btn btn-dark" style="padding: 7px 40px; margin-bottom: 20px;border: solid 1px green;">Back</a>
+            <!-- <a href="adminhome.php" class="btn btn-dark" style="padding: 7px 40px; margin-bottom: 20px;border: solid 1px green;">Back</a> -->
             <input type="submit" class="btn btn-primary" required name="addthisprod" value="Add this Product" style="padding: 7px 40px; margin-bottom: 20px;">
         </form>
 
