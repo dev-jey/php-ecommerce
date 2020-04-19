@@ -22,7 +22,7 @@ if (isset($_POST['addthisprod'])) {
         $new = $rowitem3['Quantity'] + $quantity;
         $sq = mysqli_query($conn, "UPDATE Item_data SET Quantity = '$new' where Item_id='" . $Item_category . "' and  Size='" . $Item_size . "' and type='" . $Stone_type . "' and Color='" . $Item_color . "'");
     }
-    // echo '<script>window.location="adminhome.php"</script>';
+    echo '<script>window.location="adminhome.php"</script>';
 }
 ?>
 

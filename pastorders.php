@@ -60,8 +60,9 @@ include("include/header.php");
                     </style>
                     <div class="lis">
                         <ol>
-                            <li><span><?php echo $rows["Item_id"] ?></span>
+                            <li><span><?php echo $rows["Order_id"] ?></span>
                                 <p>You ordered for: <?php echo $rows['Item_category'] ?> <i>Size: <?php echo $rows['Item_size'] ?></i><br>
+                                    <span>Quantity: <?php echo $rows['quantity'] ?></span><br>
                                     <span>OrderId:<?php echo $rows['Order_id'] ?></span><br>
                                     <span>Full name: <?php echo $rows['firstname'] ?> - <?php echo $rows['lastname'] ?></span><br>
                                     <span>Email: <?php echo $rows['email'] ?></span><br>
