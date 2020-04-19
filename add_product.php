@@ -10,11 +10,19 @@ if (isset($_POST['addthisprod'])) {
     $Item_color = $_POST['Item_color'];
     $Stone_type = $_POST['Stone_type'];
     $Item_size = $_POST['Item_size'];
-
-    $sqlinsert = "INSERT INTO Item_data(Item_id,Color,Size,type) VALUES('$Item_category','$Item_color','$Item_size','$Stone_type')";
-    // echo $sqlinsert;
-    mysqli_query($conn, $sqlinsert);
-    echo '<script>window.location="adminhome.php"</script>';
+    $quantity = $_POST['quantity'];
+    $sqlselect = "SELECT *  FROM Item_data where Item_id='" . $Item_category . "' and  Size='" . $Item_size . "' and type='" . $Stone_type . "' and Color='" . $Item_color . "'";
+    $roe = mysqli_query($conn, $sqlselect);
+    $rowitem3 = mysqli_fetch_assoc($roe);
+    if ($roe->num_rows === 0) {
+        $sqlinsert = "INSERT INTO Item_data(Item_id,Color,Size,type, Quantity) VALUES('$Item_category','$Item_color','$Item_size','$Stone_type', '$quantity')";
+        echo $sqlinsert;
+        mysqli_query($conn, $sqlinsert);
+    } else {
+        $new = $rowitem3['Quantity'] + $quantity;
+        $sq = mysqli_query($conn, "UPDATE Item_data SET Quantity = '$new' where Item_id='" . $Item_category . "' and  Size='" . $Item_size . "' and type='" . $Stone_type . "' and Color='" . $Item_color . "'");
+    }
+    // echo '<script>window.location="adminhome.php"</script>';
 }
 ?>
 
@@ -69,6 +77,7 @@ if (isset($_POST['addthisprod'])) {
                     <option value="6">Amber (kahraman)</option>
                 </select>
             </div>
+            <input type="number" name="quantity" class="form-control" placeholder="Quantity" required><br><br>
             <a href="admin_product.php" class="btn btn-dark" style="padding: 7px 40px; margin-bottom: 20px;border: solid 1px green;">Back</a>
             <input type="submit" class="btn btn-primary" required name="addthisprod" value="Add this Product" style="padding: 7px 40px; margin-bottom: 20px;">
         </form>

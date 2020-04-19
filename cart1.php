@@ -44,11 +44,12 @@ if (isset($_POST['add'])) {
 				$color = $_SESSION["cart"][$select]['color'];
 				$stone_type = $_SESSION["cart"][$select]['stone_type'];
 				$size = $_SESSION["cart"][$select]['size'];
-				$sql3 = "SELECT COUNT(*) as total FROM Item_data where Item_id='" . $item_id . "' and  Size='" . $size . "' and type='" . $stone_type . "' and Color='" . $color . "' ";
+				$sql3 = "SELECT * FROM Item_data where Item_id='" . $item_id . "' and  Size='" . $size . "' and type='" . $stone_type . "' and Color='" . $color . "' ";
+				// echo $sql3;
 				$res3 = mysqli_query($conn, $sql3);
 				// echo $sql3;
 				$rowitem3 = mysqli_fetch_assoc($res3);
-				if ($rowitem3['total'] == '0') {
+				if ($res3->num_rows > 0  && ($q >= $rowitem3['Quantity'])) {
 					$error = true;
 					echo "<p style='color: red; font-style: all;padding: 0.3rem; font-size: 1.5rem;text-align:center;'>Items out of stock</p>";
 				} else {

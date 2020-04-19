@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 19, 2020 at 06:06 PM
+-- Generation Time: Apr 19, 2020 at 07:19 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -51,10 +51,8 @@ INSERT INTO `admin` (`AdminUsername`, `Fname`, `Lname`, `Password`) VALUES
 
 CREATE TABLE `item` (
   `Item_id` int(11) NOT NULL,
-  `Item_color` set('Gold','Silver','Rose Gold') NOT NULL,
   `Item_category` enum('Rings','Bracelet','Necklace','Earring') NOT NULL,
   `Item_price` int(11) NOT NULL,
-  `Item_size` enum('XS','S','M','L') NOT NULL,
   `image` varchar(255) NOT NULL,
   `Description` longtext NOT NULL,
   `Material` varchar(255) NOT NULL,
@@ -65,11 +63,11 @@ CREATE TABLE `item` (
 -- Dumping data for table `item`
 --
 
-INSERT INTO `item` (`Item_id`, `Item_color`, `Item_category`, `Item_price`, `Item_size`, `image`, `Description`, `Material`, `warranty`) VALUES
-(2902254, 'Gold', 'Rings', 1700, 'M', 'https://res.cloudinary.com/dw675k0f5/image/upload/v1587032489/storo/ring.png', 'Shining, smooth stainless steel ring     Embellished with crystals         Comes packed in a branded box', 'Metal', 2),
-(5464833, 'Gold', 'Earring', 1000, 'M', 'https://res.cloudinary.com/dw675k0f5/image/upload/v1587032497/storo/earrings.jpg', 'This pair of pierced earrings by crystal features a charming floral design. Each piece is highlighted by a pink stone, which is beautifully complemented by a rose-gold tone plated setting and clear crystal pave.', 'Metal', 1),
-(5498966, 'Gold', 'Necklace', 800, 'M', 'https://res.cloudinary.com/dw675k0f5/image/upload/v1587032511/storo/necklace.png', 'Smooth, rosegold-plated metal bracelet Floral charms with embellished crystals Open ends for adjustable fit Comes packed in a branded box', 'Metal', 2),
-(23052434, 'Gold', 'Bracelet', 1200, 'M', 'https://res.cloudinary.com/dw675k0f5/image/upload/v1587032523/storo/Bracelet.jpg', 'Quality bracelets for you', 'Metal', 2);
+INSERT INTO `item` (`Item_id`, `Item_category`, `Item_price`, `image`, `Description`, `Material`, `warranty`) VALUES
+(2902254, 'Rings', 1700, 'https://res.cloudinary.com/dw675k0f5/image/upload/v1587032489/storo/ring.png', 'Shining, smooth stainless steel ring     Embellished with crystals         Comes packed in a branded box', 'Metal', 2),
+(5464833, 'Earring', 1000, 'https://res.cloudinary.com/dw675k0f5/image/upload/v1587032497/storo/earrings.jpg', 'This pair of pierced earrings by crystal features a charming floral design. Each piece is highlighted by a pink stone, which is beautifully complemented by a rose-gold tone plated setting and clear crystal pave.', 'Metal', 1),
+(5498966, 'Necklace', 800, 'https://res.cloudinary.com/dw675k0f5/image/upload/v1587032511/storo/necklace.png', 'Smooth, rosegold-plated metal bracelet Floral charms with embellished crystals Open ends for adjustable fit Comes packed in a branded box', 'Metal', 2),
+(23052434, 'Bracelet', 1200, 'https://res.cloudinary.com/dw675k0f5/image/upload/v1587032523/storo/Bracelet.jpg', 'Quality bracelets for you', 'Metal', 2);
 
 -- --------------------------------------------------------
 
@@ -78,21 +76,21 @@ INSERT INTO `item` (`Item_id`, `Item_color`, `Item_category`, `Item_price`, `Ite
 --
 
 CREATE TABLE `Item_data` (
+  `id` int(11) NOT NULL,
   `Item_id` int(11) NOT NULL,
   `Color` varchar(30) NOT NULL,
   `Size` varchar(30) NOT NULL,
-  `type` int(11) NOT NULL
+  `type` int(11) NOT NULL,
+  `Quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `Item_data`
 --
 
-INSERT INTO `Item_data` (`Item_id`, `Color`, `Size`, `type`) VALUES
-(5464833, 'Gold', 'XS', 1),
-(5464833, 'Gold', 'XS', 1),
-(5464833, 'Gold', 'XS', 1),
-(5464833, 'Gold', 'XS', 1);
+INSERT INTO `Item_data` (`id`, `Item_id`, `Color`, `Size`, `type`, `Quantity`) VALUES
+(5, 2902254, 'Gold', 'XS', 1, 2),
+(6, 5498966, 'Gold', 'L', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -131,7 +129,15 @@ INSERT INTO `orders` (`username`, `Order_id`, `Item_id`, `quantity`, `total`, `a
 ('razan123', 51, 2902254, 1, 1700, '123', 'PayPal', 'razan', 'alii', 'mimi@gmail.com', 'Rings', 'M', 'KSA', '444-444-4443'),
 ('smith9', 52, 2902254, 2, 3400, '234', 'PayPal', 'Jey', 'Key', 'asep@gmail.com', 'Rings', 'M', 'KSA', '234-212-4122'),
 ('smith9', 53, 23052438, 1, 2800, '2342', 'PayPal', 'Ken', 'Mijungu', 'min@gmail.com', 'Necklace', 'M', 'KSA', '234-123-2445'),
-('smith9', 54, 23052438, 1, 2800, '2342', 'PayPal', 'Ken', 'Mijungu', 'min@gmail.com', 'Bracelet', 'S', 'KSA', '234-123-2445');
+('smith9', 54, 23052438, 1, 2800, '2342', 'PayPal', 'Ken', 'Mijungu', 'min@gmail.com', 'Bracelet', 'S', 'KSA', '234-123-2445'),
+('smith9', 55, 2902254, 2, 3400, '23423', 'VISA', 'Jey', 'r', 'as@sa.dsa', 'Rings', 'XS', 'KSA', '234-212-1424'),
+('smith9', 56, 2902254, 4, 6800, 'wer', 'VISA', 'dsf', 'sdf', 'sd@wer.ewr', 'Rings', 'XS', 'KSA', '234-234-2523'),
+('smith9', 57, 2902254, 2, 3400, 'sdfsd', 'PayPal', 'sdf', 'dsf', 'sd@sdf.sfd', 'Rings', 'XS', 'KSA', '324-235-2342'),
+('smith9', 58, 2902254, 2, 3400, 'sdfsd', 'PayPal', 'sdf', 'dsf', 'sd@sdf.sfd', 'Rings', 'XS', 'KSA', '324-235-2342'),
+('smith9', 59, 2902254, 2, 3400, 'sdfsd', 'PayPal', 'sdf', 'dsf', 'sd@sdf.sfd', 'Rings', 'XS', 'KSA', '324-235-2342'),
+('smith9', 60, 2902254, 2, 3400, 'sdfsd', 'PayPal', 'sdf', 'dsf', 'sd@sdf.sfd', 'Rings', 'XS', 'KSA', '324-235-2342'),
+('smith9', 61, 2902254, 2, 3400, 'sdfsd', 'PayPal', 'sdf', 'dsf', 'sd@sdf.sfd', 'Rings', 'XS', 'KSA', '324-235-2342'),
+('smith9', 62, 2902254, 2, 3400, 'sdfsd', 'PayPal', 'sdf', 'dsf', 'sd@sdf.sfd', 'Rings', 'XS', 'KSA', '324-235-2342');
 
 -- --------------------------------------------------------
 
@@ -207,6 +213,7 @@ ALTER TABLE `item`
 -- Indexes for table `Item_data`
 --
 ALTER TABLE `Item_data`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `type` (`type`),
   ADD KEY `Item_id` (`Item_id`);
 
@@ -241,10 +248,16 @@ ALTER TABLE `item`
   MODIFY `Item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23052440;
 
 --
+-- AUTO_INCREMENT for table `Item_data`
+--
+ALTER TABLE `Item_data`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `Order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `Order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `stone_type`

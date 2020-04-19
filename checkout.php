@@ -34,10 +34,23 @@ if (isset($_POST['checkout'])) {
     $q = $value['quantity'];
     $c = $value['name'];
     $s = $value['size'];
+    $t = $value['stone_type'];
+    $color = $value['color'];
     $user = $_SESSION['email'];
     $sql = "INSERT INTO orders (username, firstname, Item_id, lastname, country, phone, email, address, quantity, total, payment_method, Item_category, Item_size)
             VALUES ('$user','$firstname', '$product_id', '$lastname', '$country','$phone','$email', '$address', '$q', '$total', '$payment_method', '$c', '$s')";
     $result = mysqli_query($conn, $sql);
+
+
+    $sqlselect = "SELECT *  FROM Item_data where Item_id='" . $product_id. "' and  Size='" . $s . "' and type='" . $t . "' and Color='" . $color . "'";
+    $roe = mysqli_query($conn, $sqlselect);
+    $rowitem3 = mysqli_fetch_assoc($roe);
+    // echo $sqlselect;
+
+    $new = $rowitem3['Quantity'] - $q;
+    $sr = "UPDATE Item_data SET Quantity='$new' where Item_id='" . $product_id. "' and  Size='" . $s . "' and type='" . $t . "' and Color='" . $color . "'";
+    // echo $sr;
+    $sq = mysqli_query($conn, $sr);
     $_SESSION['cart'] = [];
     echo '<script>window.location="thankyou.php"</script>';
   }

@@ -126,13 +126,13 @@ if (isset($_POST['addcart'])) {
 		echo "<p style='color: red; font-style: all;padding: 0.3rem; font-size: 1.5rem;text-align:center;'>Size ", $size, " is out of stock. Kindly select another size.</p>";
 	}
 
-	$sql4 = "SELECT COUNT(*) as total  FROM Item_data where Item_id='" . $product_id . "' and  Size='" . $size . "' and type='" . $stone_type . "' and Color='" . $color . "'" ;
+	$sql4 = "SELECT *  FROM Item_data where Item_id='" . $product_id . "' and  Size='" . $size . "' and type='" . $stone_type . "' and Color='" . $color . "'" ;
 	$res4 = mysqli_query($conn, $sql4);
 	$rowitem4 = mysqli_fetch_assoc($res4);
 	// echo $rowitem3['total'];
-	if ($rowitem4['total'] === '0') {
+	if ($res4->num_rows > 0 && $rowitem4['Quantity'] === 0) {
 		$error = true;
-		echo "<p style='color: red; font-style: all;padding: 0.3rem; font-size: 1.5rem;text-align:center;'>",$quantity ," ",  $rowitem['Item_category'],"(s) not available. There are ", $rowitem4['total'] , " item(s) remaining in stock</p>";
+		echo "<p style='color: red; font-style: all;padding: 0.3rem; font-size: 1.5rem;text-align:center;'>",$quantity ," ",  $rowitem['Item_category'],"(s) not available. There are ", $rowitem4['Quantity'] , " item(s) remaining in stock</p>";
 	}
 
 	if ($error == false) {
@@ -160,9 +160,9 @@ if (isset($_POST['addcart'])) {
 			$item_array = array(
 				'product_id' => $product_id,
 				'image' => $rowitem['image'],
-				'size' => $rowitem['Item_size'],
-				'color' => $rowitem['Item_color'],
-				'stone_type' => $rowitem['Stone_type'],
+				'size' =>  $size,
+				'color' => $color,
+				'stone_type' => $stone_type,
 				'price' => $rowitem["Item_price"],
 				'name' => $rowitem['Item_category'],
 				'quantity' => $quantity,
