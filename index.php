@@ -27,6 +27,8 @@ include("include/header.php");
 					<p>Our site contains bracelets, earrings, knots, rings, all of which are distinguished by the presence of stones gems.</p>
 				</div>
 			</div>
+ <!--Alhanouf sectin-->
+
 			<div class="row">
 				<?php
 				$query1 = 'SELECT * FROM item';

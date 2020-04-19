@@ -77,7 +77,7 @@ include("include/header.php");
 </style>
 
 
-<!-- Start Maram sectin-->
+<!--Alhanouf and Hissah sectin-->
 
 <hr>
 <?php
@@ -146,7 +146,7 @@ if (isset($_POST['addcart'])) {
 					'size' => $size,
 					'color' => $color,
 					'stone_type' => $stone_type,
-					'price' => $rowitem["Item_price"],
+					'price' => $rowitem4["price"],
 					'name' => $rowitem['Item_category'],
 					'quantity' => $quantity,
 				);
@@ -163,7 +163,7 @@ if (isset($_POST['addcart'])) {
 				'size' =>  $size,
 				'color' => $color,
 				'stone_type' => $stone_type,
-				'price' => $rowitem["Item_price"],
+				'price' => $rowitem4["price"],
 				'name' => $rowitem['Item_category'],
 				'quantity' => $quantity,
 			);
@@ -224,7 +224,6 @@ if (isset($_POST['addcart'])) {
 
 			<h3>Design details: </h3>
 			<ul>
-				<li>Color: <?php echo $rowitem['Item_color'] ?></li>
 				<li>Accessory Type: <?php echo $rowitem['Item_category'] ?></li>
 				<li>Proudct No. <?php echo $rowitem['Item_id'] ?></li>
 				<li>Product Material: <?php echo $rowitem['Material'] ?></li>
