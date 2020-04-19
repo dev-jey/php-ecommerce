@@ -29,14 +29,15 @@ include("database/connect.php");
                     <thead>
                         <a href="add_product.php" class="btn btn-primary btn-xs pull-right"><b>+</b> Add new product</a>
                         
-                        <a name="Update/Delete Item" type="submit" value="Update/Delete Item" href = "Modify_Item.php" class="btn btn-primary" >Update/Delete Item</a>
-                        
+                        <h2>Categories</h2>                        
                         <tr>
                             <th>ID</th>
                             <th>Image</th>
                             <th>Name</th>
-                            <th>Price</th>
+                            <th>Warranty</th>
+                            <th>Material</th>
                             <th>Description</th>
+                            <!-- <th>View Products</th> -->
                         </tr>
                     </thead>
 
@@ -49,8 +50,10 @@ include("database/connect.php");
                             <td><?php echo $rows['Item_id'] ?></td>
                             <td><img src="<?php echo $rows['image'] ?>" alt="No image" width="100"></td>
                             <td><?php echo $rows['Item_category'] ?></td>
-                            <td><?php echo $rows['Item_price'] ?></td>
+                            <td><?php echo $rows['warranty'] ?> Year(s)</td>
+                            <td><?php echo $rows['Material'] ?></td>
                             <td><?php echo $rows['Description'] ?></td>
+                            <!-- <td><?php echo $rows['Description'] ?></td> -->
                         </tr>
                     <?php
                     }
