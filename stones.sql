@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 18, 2020 at 03:13 AM
+-- Generation Time: Apr 19, 2020 at 06:06 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -55,23 +55,44 @@ CREATE TABLE `item` (
   `Item_category` enum('Rings','Bracelet','Necklace','Earring') NOT NULL,
   `Item_price` int(11) NOT NULL,
   `Item_size` enum('XS','S','M','L') NOT NULL,
-  `Stone_type` int(11) NOT NULL,
   `image` varchar(255) NOT NULL,
   `Description` longtext NOT NULL,
   `Material` varchar(255) NOT NULL,
-  `warranty` int(11) NOT NULL,
-  `In_stock` int(11) NOT NULL
+  `warranty` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `item`
 --
 
-INSERT INTO `item` (`Item_id`, `Item_color`, `Item_category`, `Item_price`, `Item_size`, `Stone_type`, `image`, `Description`, `Material`, `warranty`, `In_stock`) VALUES
-(2902254, 'Gold', 'Rings', 1700, 'M', 6, 'https://res.cloudinary.com/dw675k0f5/image/upload/v1587032489/storo/ring.png', 'Shining, smooth stainless steel ring     Embellished with crystals         Comes packed in a branded box', 'Metal', 2, 20),
-(5464833, 'Gold', 'Earring', 1000, 'M', 6, 'https://res.cloudinary.com/dw675k0f5/image/upload/v1587032497/storo/earrings.jpg', 'This pair of pierced earrings by crystal features a charming floral design. Each piece is highlighted by a pink stone, which is beautifully complemented by a rose-gold tone plated setting and clear crystal pave.', 'Metal', 1, 3),
-(5498966, 'Gold', 'Necklace', 800, 'M', 6, 'https://res.cloudinary.com/dw675k0f5/image/upload/v1587032511/storo/necklace.png', 'Smooth, rosegold-plated metal bracelet Floral charms with embellished crystals Open ends for adjustable fit Comes packed in a branded box', 'Metal', 2, 5),
-(23052434, 'Gold', 'Bracelet', 1200, 'M', 6, 'https://res.cloudinary.com/dw675k0f5/image/upload/v1587032523/storo/Bracelet.jpg', 'Quality bracelets for you', 'Metal', 2, 2);
+INSERT INTO `item` (`Item_id`, `Item_color`, `Item_category`, `Item_price`, `Item_size`, `image`, `Description`, `Material`, `warranty`) VALUES
+(2902254, 'Gold', 'Rings', 1700, 'M', 'https://res.cloudinary.com/dw675k0f5/image/upload/v1587032489/storo/ring.png', 'Shining, smooth stainless steel ring     Embellished with crystals         Comes packed in a branded box', 'Metal', 2),
+(5464833, 'Gold', 'Earring', 1000, 'M', 'https://res.cloudinary.com/dw675k0f5/image/upload/v1587032497/storo/earrings.jpg', 'This pair of pierced earrings by crystal features a charming floral design. Each piece is highlighted by a pink stone, which is beautifully complemented by a rose-gold tone plated setting and clear crystal pave.', 'Metal', 1),
+(5498966, 'Gold', 'Necklace', 800, 'M', 'https://res.cloudinary.com/dw675k0f5/image/upload/v1587032511/storo/necklace.png', 'Smooth, rosegold-plated metal bracelet Floral charms with embellished crystals Open ends for adjustable fit Comes packed in a branded box', 'Metal', 2),
+(23052434, 'Gold', 'Bracelet', 1200, 'M', 'https://res.cloudinary.com/dw675k0f5/image/upload/v1587032523/storo/Bracelet.jpg', 'Quality bracelets for you', 'Metal', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Item_data`
+--
+
+CREATE TABLE `Item_data` (
+  `Item_id` int(11) NOT NULL,
+  `Color` varchar(30) NOT NULL,
+  `Size` varchar(30) NOT NULL,
+  `type` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `Item_data`
+--
+
+INSERT INTO `Item_data` (`Item_id`, `Color`, `Size`, `type`) VALUES
+(5464833, 'Gold', 'XS', 1),
+(5464833, 'Gold', 'XS', 1),
+(5464833, 'Gold', 'XS', 1),
+(5464833, 'Gold', 'XS', 1);
 
 -- --------------------------------------------------------
 
@@ -180,8 +201,14 @@ ALTER TABLE `admin`
 -- Indexes for table `item`
 --
 ALTER TABLE `item`
-  ADD PRIMARY KEY (`Item_id`),
-  ADD KEY `Stone_type` (`Stone_type`);
+  ADD PRIMARY KEY (`Item_id`);
+
+--
+-- Indexes for table `Item_data`
+--
+ALTER TABLE `Item_data`
+  ADD KEY `type` (`type`),
+  ADD KEY `Item_id` (`Item_id`);
 
 --
 -- Indexes for table `orders`
@@ -230,10 +257,11 @@ ALTER TABLE `stone_type`
 --
 
 --
--- Constraints for table `item`
+-- Constraints for table `Item_data`
 --
-ALTER TABLE `item`
-  ADD CONSTRAINT `item_ibfk_1` FOREIGN KEY (`Stone_type`) REFERENCES `stone_type` (`id`) ON UPDATE CASCADE;
+ALTER TABLE `Item_data`
+  ADD CONSTRAINT `Item_data_ibfk_1` FOREIGN KEY (`type`) REFERENCES `stone_type` (`id`),
+  ADD CONSTRAINT `Item_data_ibfk_2` FOREIGN KEY (`Item_id`) REFERENCES `item` (`Item_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
