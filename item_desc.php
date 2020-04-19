@@ -130,7 +130,7 @@ if (isset($_POST['addcart'])) {
 	$res4 = mysqli_query($conn, $sql4);
 	$rowitem4 = mysqli_fetch_assoc($res4);
 	// echo $rowitem3['total'];
-	if ($res4->num_rows > 0 && $rowitem4['Quantity'] === 0) {
+	if ($res4->num_rows > 0 && $rowitem4['Quantity'] === '0') {
 		$error = true;
 		echo "<p style='color: red; font-style: all;padding: 0.3rem; font-size: 1.5rem;text-align:center;'>",$quantity ," ",  $rowitem['Item_category'],"(s) not available. There are ", $rowitem4['Quantity'] , " item(s) remaining in stock</p>";
 	}
