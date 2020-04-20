@@ -56,8 +56,8 @@ if (isset($_POST['checkout'])) {
     $sr = "UPDATE Item_data SET Quantity='$new' where Item_id='" . $product_id . "' and  Size='" . $s . "' and type='" . $t . "' and Color='" . $color . "'";
     // echo $sr;
     $sq = mysqli_query($conn, $sr);
-    $_SESSION['cart'] = [];
-    echo '<script>window.location="thankyou.php"</script>';
+    // $_SESSION['cart'] = [];
+    // echo '<script>window.location="thankyou.php"</script>';
   }
 }
 ?>
@@ -222,11 +222,11 @@ if (isset($_POST['checkout'])) {
                             </script>
                             <div class="col-md-12">
                               <label for="card_no" class="text-black">Card No<span class="text-danger">*</span></label>
-                              <input type="text" class="form-control" onkeyup="formatCreditCard()" placeholder="xxxx-xxxx-xxxx-xxxx"  name="card_no" id="credit-card" value="">
+                              <input type="text" class="form-control" required pattern="[0-9]{13,16}" placeholder="xxxx-xxxx-xxxx-xxxx"  name="card_no" id="credit-card" value="">
                             </div>
                             <div class="col-md-12"><br>
                               <label for="card_Date" class="text-black">Expiry Date <span class="text-danger">*</span></label>
-                              <input type="number" class="form-control" id="card_date" name="card_date" placeholder="MM-YY" required>
+                              <input type="text" pattern="([0-9]{2}[/]?){2}" class="form-control" id="card_date" name="card_date" placeholder="MM/YY" required>
                             </div>
                             <br><br>
                             <br><br>
