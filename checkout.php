@@ -19,7 +19,7 @@ if (isset($_POST['checkout'])) {
   $total = $_POST['total'];
   $quantity = $_POST['quantity'];
   $product_id = $_POST['product_id'];
-  $payment_method = $_POST['payment_method'];
+  $payment_method = 'Visa';
   $card_no = $_POST['card_no'];
   $card_date = $_POST['card_date'];
 
@@ -197,31 +197,42 @@ if (isset($_POST['checkout'])) {
 
                             <div class="border p-3 mb-3">
                               <h3 class="h4 mb-0">
-                                <label> <input type="radio" value="Visa" name="payment_method" required />
-                                  <!-- <a class="d-block" data-toggle="collapse" href="#collapsecheque" role="button" aria-expanded="false" aria-controls="collapsecheque"> -->
-                                    Visa
-                              </label>
+                                <label>
+                                  <a class="d-block" data-toggle="collapse" href="#collapsecheque" role="button" aria-expanded="false" aria-controls="collapsecheque">
+                                    Visa</a>
+                                </label>
 
-                              <div class="collape" id="collapeceque">
-                                <div class="py-2">
-                                  <p class="mb-0 ml-4 pl-4" style="margin-left: 20px">Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
+                                <div class="collapse" id="collapsecheque">
+                                  <div class="py-2">
+                                    <p class="mb-0 ml-4 pl-4" style="margin-left: 20px">Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
+                                  </div>
                                 </div>
-
-                                <div class="col-md-12">
-                                  <label for="card_no" class="text-black">Card No<span class="text-danger">*</span></label>
-                                  <input type="number" class="form-control" id="card_no" name="card_no" required>
-                                </div>
-                                <div class="col-md-12"><br>
-                                  <label for="card_Date" class="text-black">Expiry Date <span class="text-danger">*</span></label>
-                                  <input type="text" class="form-control" id="card_date" name="card_date" placeholder="MM/YYYY" required>
-                                </div>
-                                <br><br>
-                                <br><br>
-                                <br><br>
-                                <br><br>
-                              </div><br><br>
                             </div>
+                            <br><br>
+                            <script>
+                              function formatCreditCard() {
+                                var x = document.getElementById("credit-card");
+                                var index = x.value.lastIndexOf('-');
+                                var test = x.value.substr(index + 1);
+                                if (test.length === 4)
+                                  x.value = x.value + '-';
 
+                              }
+
+                            </script>
+                            <div class="col-md-12">
+                              <label for="card_no" class="text-black">Card No<span class="text-danger">*</span></label>
+                              <input type="text" class="form-control" onkeyup="formatCreditCard()" placeholder="xxxx-xxxx-xxxx-xxxx"  name="card_no" id="credit-card" value="">
+                            </div>
+                            <div class="col-md-12"><br>
+                              <label for="card_Date" class="text-black">Expiry Date <span class="text-danger">*</span></label>
+                              <input type="number" class="form-control" id="card_date" name="card_date" placeholder="MM-YY" required>
+                            </div>
+                            <br><br>
+                            <br><br>
+                            <br><br>
+                            <br><br>
+                            <br><br>
                             <div class="form-group">
                               <p>
                                 <button class="btn btn-dark btn-sm height-auto px-4 py-3 " style="border: 1px solid silver" type="reset">Clear</button><button type="submit" class="btn btn-sm height-auto px-4 py-3 btn-primary" name="checkout">Place Order</button></p>
